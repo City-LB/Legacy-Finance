@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CITY LEGACY BANK - Open Your Account</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0EA5E9; --blue-dark: #0284c7; --blue-light: #E0F2FE;
+    --navy: #0A1F44; --gray: #F8FAFC; --white: #ffffff;
+    --text: #1E293B; --border: #CBD5E1; --error: #DC2626;
+  }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif; }
+  body { background: var(--gray); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; color: var(--text); }
+
+.container { width: 100%; max-width: 560px; background: var(--white); border: 1px solid var(--border); border-radius: 24px; box-shadow: 0 10px 40px rgba(2,132,199,0.12); padding: 36px 32px; }
+
+  /* LOGO */
+.logo { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px; }
+.logo-3d { width: 58px; height: 58px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; transform: perspective(500px) rotateX(20deg) rotateY(-12deg); box-shadow: 0 10px 25px rgba(14,165,233,0.3); }
+.tile { border-radius: 5px; }
+.tile1 { background: linear-gradient(135deg, var(--blue), #38BDF8); }
+.tile2 { background: linear-gradient(135deg, var(--blue-dark), var(--blue)); }
+.tile3 { background: linear-gradient(135deg, var(--blue-dark), var(--blue)); }
+.tile4 { background: linear-gradient(135deg, var(--blue), #38BDF8); }
+.logo-brand { text-align: center; margin-bottom: 25px; }
+.logo-text-main { font-size: 26px; font-weight: 900; letter-spacing: 1.5px; background: linear-gradient(90deg, var(--navy), var(--blue-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.logo-text-sub { font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--blue-dark); border-top: 2px solid var(--blue); padding-top: 4px; margin-top: 3px; display: inline-block; }
+.tagline { text-align: center; font-size: 12px; color: #64748B; margin-bottom: 25px; }
+
+.section { display: none; }.section.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from {opacity: 0; transform: translateY(8px);} to {opacity: 1; transform: translateY(0);} }
+.nav-header { display: flex; align-items: center; margin-bottom: 20px; }
+.btn-back { background: none; border: none; color: var(--blue); font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  /* WELCOME HEADER WITH PHONE */
+.welcome-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 30px; }
+.welcome-text { flex: 1; text-align: left; }
+.phone-wrap { position: relative; width: 120px; flex-shrink: 0; }
+.phone-bg { position: absolute; top: -10px; right: -10px; width: 140px; height: 140px; background: #EFF6FF; border-radius: 50%; z-index: 0; }
+.phone { position: relative; width: 120px; height: 225px; background: #111827; border-radius: 24px; padding: 8px; transform: rotate(-10deg); box-shadow: 0 20px 40px rgba(0,0,0,0.12); z-index: 1; }
+.phone-screen { width: 100%; height: 100%; background: #FFFFFF; border-radius: 18px; padding: 16px 9px; display: flex; flex-direction: column; align-items: center; }
+.phone-logo { width: 24px; height: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 5px; }
+.phone-logo span { border-radius: 3px; background: #3B82F6; }
+.phone-brand { font-size: 8.5px; font-weight: 800; color: #1E3A8A; }
+.phone-sub { font-size: 5.5px; font-weight: 700; color: #3B82F6; letter-spacing: 1px; }
+
+.form-title { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.desc { font-size: 14px; color: #64748B; line-height: 1.6; margin-bottom: 20px; }
+
+.input-group { margin-bottom: 18px; position: relative; }
+.input-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+.input-group input, select { width: 100%; padding: 14px 16px; background: var(--white); border: 1.5px solid var(--border); border-radius: 10px; font-size: 15px; }
+.input-group input:focus, select:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 4px rgba(14,165,233,0.15); }
+
+.btn-primary { width: 100%; background: var(--blue); color: var(--white); padding: 15px; border: none; border-radius: 10px; font-size: 16px; font-weight: 800; cursor: pointer; }
+.btn-primary:hover { background: var(--blue-dark); }
+.btn-primary:disabled { background: #94A3B8; cursor: not-allowed; }
+.divider { display: flex; align-items: center; text-align: center; color: #94A3B8; margin: 22px 0; font-size: 13px; font-weight: 600; }
+.divider::before,.divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
+
+  /* CAPTCHA */
+.captcha-code { font-family: 'Courier New', monospace; font-size: 30px; font-weight: 900; letter-spacing: 8px; background: var(--blue-light); color: var(--navy); padding: 20px; border-radius: 10px; user-select: none; margin: 20px 0; border: 2px dashed var(--blue); text-align: center; }
+.error-msg { color: var(--error); font-size: 13px; margin-top: 6px; display: none; font-weight: 500; }
+.lockout-msg { color: var(--error); font-size: 14px; text-align: center; margin: 10px 0; font-weight: 700; display: none; }
+
+  /* Terms */
+.terms-box { height: 320px; overflow-y: scroll; border: 1px solid var(--border); padding: 20px; border-radius: 10px; background: #FCFD; font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
+.terms-box h3 { color: var(--navy); margin: 14px 0 8px; font-size: 15px; }
+
+  /* FORM */
+.section-title { color: var(--navy); font-size: 16px; font-weight: 800; margin: 25px 0 15px 0; border-left: 4px solid var(--blue); padding-left: 12px; }
+.form-row { display: flex; gap: 15px; }.form-group{margin-bottom:18px; flex:1;}
+.required::after { content: " *"; color: var(--error); }
+.upload-wrap { margin-bottom: 18px; }
+.upload-label { font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block; }
+.upload-box { border: 2px dashed var(--blue); border-radius: 10px; padding: 18px; text-align: center; background: var(--blue-light); cursor: pointer; }
+.upload-box input[type="file"] { display: block; margin: 10px auto 0; }
+.upload-preview { max-width: 100%; max-height: 160px; margin-top: 12px; border-radius: 8px; display: none; border: 2px solid var(--blue); }
+.disclaimer { background: var(--blue-light); border-left: 4px solid var(--blue); padding: 14px; font-size: 12px; margin: 18px 0; border-radius: 8px; }
+.success-msg { text-align: center; padding: 30px 20px; }
+.success-msg h2 { color: var(--blue-dark); margin-bottom: 12px; }
+.agreement-check { margin: 20px 0; font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
+  @media(max-width: 500px) {.form-row { flex-direction: column; }.container { padding: 28px 22px; }.phone-wrap{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SECTION 1: WELCOME / LANDING -->
+  <div class="section active" id="welcomeSection">
+    <div class="welcome-header">
+      <div class="welcome-text">
+        <div class="logo"><div class="logo-3d"><div class="tile tile1"></div><div class="tile tile2"></div><div class="tile tile3"></div><div class="tile tile4"></div></div></div>
+        <div class="logo-brand" style="text-align:left; margin-bottom:6px;">
+          <div class="logo-text-main">CITY LEGACY</div>
+          <div class="logo-text-sub">BANK</div>
+        </div>
+        <p class="tagline" style="text-align:left;">Member FDIC | Equal Housing Lender</p>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone-bg"></div>
+        <div class="phone"><div class="phone-screen">
+          <div class="phone-logo"><span></span><span></span><span></span><span></span></div>
+          <div class="phone-brand">CITY LEGACY</div>
+          <div class="phone-sub">BANK</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="form-title">Sign Up</div>
+    <div class="desc">Create your account and start banking with confidence.</div>
+    <div class="divider">New to CITY LEGACY BANK</div>
+    <button class="btn-primary" id="openAccountBtn">Open An Account</button>
+  </div>
+
+  <!-- SECTION 2: CAPTCHA -->
+  <div class="section" id="captchaSection">
+    <div class="nav-header"><button class="btn-back" onclick="showSection('welcomeSection')">← Back</button></div>
+    <div class="form-title">Verify You're Human</div>
+    <div class="desc">Type the code below to continue</div>
+    <div class="captcha-code" id="captchaCode">A7B2C9</div>
+    <div style="text-align:center; margin-bottom:16px;"><span class="link" onclick="generateCaptcha()" style="cursor:pointer;">↻ Refresh Code</span></div>
+    <div class="input-group">
+      <label>Enter Code</label>
+      <input type="text" id="captchaInput" placeholder="Type code above">
+      <div class="error-msg" id="captchaError">⚠ Code does not match</div>
+      <div class="lockout-msg" id="lockoutMsg">Too many attempts. Try again in <span id="countdown">10:00</span></div>
+    </div>
+    <button class="btn-primary" id="verifyCaptchaBtn">Verify & Continue</button>
+  </div>
+
+  <!-- SECTION 3: TERMS & CONDITIONS -->
+  <div class="section" id="termsSection">
+    <div class="nav-header"><button class="btn-back" onclick="showSection('captchaSection')">← Back</button></div>
+    <div class="form-title">Deposit Account Agreement</div>
+    <div class="terms-box">
+      <h3>1. AGREEMENT</h3><p>By opening an account with CITY LEGACY BANK, you agree to all terms in this Agreement, Fee Schedule, and Privacy Policy.</p>
+      <h3>2. USA PATRIOT ACT</h3><p>Federal law requires us to verify your identity. We will collect Name, DOB, Address, SSN, and Government ID.</p>
+      <h3>3. ACCOUNT OWNERSHIP</h3><p>Accounts may be individual, joint, or fiduciary. All owners are jointly liable for all transactions.</p>
+      <h3>4. DEPOSITS & WITHDRAWALS</h3><p>All deposits subject to verification. Funds availability governed by our Funds Availability Policy.</p>
+      <h3>5. FEES & CHARGES</h3><p>Accounts are subject to monthly fees, overdraft fees, and service charges as listed in Fee Schedule.</p>
+    </div>
+    <label style="font-size:14px; display:flex; align-items:center; gap:10px;"><input type="checkbox" id="agreeCheck"> I have read and agree to the Deposit Account Agreement</label>
+    <button class="btn-primary" id="continueBtn" disabled style="margin-top:16px;">Continue to Application</button>
+  </div>
+
+  <!-- SECTION 4: FULL USA BANKING FORM -->
+  <div class="section" id="accountForm">
+    <div class="nav-header"><button class="btn-back" onclick="showSection('termsSection')">← Back</button></div>
+    <div class="form-title" style="text-align:center;">New Account Application</div>
+    <form id="bankForm">
+      <div class="section-title">Account Type</div>
+      <div class="form-group">
+        <label><input type="radio" name="account_type" value="Checking" required> Personal Checking</label><br>
+        <label><input type="radio" name="account_type" value="Savings"> Personal Savings</label>
+      </div>
+
+      <div class="section-title">Personal Information</div>
+      <div class="form-row">
+        <div class="form-group"><label class="required">First Name</label><input type="text" name="first_name" required></div>
+        <div class="form-group"><label class="required">Last Name</label><input type="text" name="last_name" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="required">Date of Birth</label><input type="date" name="dob" required></div>
+        <div class="form-group"><label class="required">Social Security Number</label><input type="text" name="ssn" placeholder="XXX-XX-XXXX" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="required">Gender</label><select name="gender" required><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+        <div class="form-group"><label class="required">Marital Status</label><select name="marital_status" required><option value="">Select</option><option>Single</option><option>Married</option></select></div>
+      </div>
+      <div class="form-group"><label class="required">Employment Status</label><select name="employment_status" required><option value="">Select</option><option>Employed</option><option>Self Employed</option><option>Student</option></select></div>
+
+      <div class="section-title">Identification Documents</div>
+      <div class="upload-wrap">
+        <label class="upload-label required">Government Issued ID - Front</label>
+        <div class="upload-box"><span>📷 Click to upload Driver's License</span><input type="file" id="id_front" accept="image/*" required><img id="id_front_preview" class="upload-preview"></div>
+      </div>
+      <div class="upload-wrap">
+        <label class="upload-label required">Selfie Holding Your ID</label>
+        <div class="upload-box"><span>🤳 Click to upload Liveness Selfie</span><input type="file" id="selfie" accept="image/*" required><img id="selfie_preview" class="upload-preview"></div>
+      </div>
+
+      <div class="section-title">Residential Address</div>
+      <div class="form-group"><label class="required">Street Address</label><input type="text" name="address" required></div>
+      <div class="form-row">
+        <div class="form-group"><label class="required">City</label><input type="text" name="city" required></div>
+        <div class="form-group"><label class="required">State</label><input type="text" name="state" required></div>
+        <div class="form-group"><label class="required">ZIP Code</label><input type="text" name="zip" required></div>
+      </div>
+
+      <div class="section-title">Contact Information</div>
+      <div class="form-row">
+        <div class="form-group"><label class="required">Primary Phone</label><input type="tel" name="phone" required></div>
+        <div class="form-group"><label class="required">Email Address</label><input type="email" name="email" required></div>
+      </div>
+
+      <div class="disclaimer"><strong>Notice:</strong> Under the USA PATRIOT ACT, we must collect information to verify your identity.</div>
+      <div class="agreement-check"><input type="checkbox" id="finalAgree" required><label for="finalAgree">I certify that all information provided is true and accurate.</label></div>
+      <button type="submit" class="btn-primary">Submit Application</button>
+    </form>
+  </div>
+
+  <!-- SECTION 5: SUCCESS -->
+  <div class="section" id="successSection">
+    <div class="success-msg">
+      <h2>Application Submitted!</h2>
+      <p>Thank you for choosing CITY LEGACY BANK.</p>
+      <p style="margin-top:10px; color:#475569;">You will get a response within 3 business days.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showSection(id){
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  // 1. Open Account -> CAPTCHA
+  document.getElementById('openAccountBtn').onclick = () => { generateCaptcha(); showSection('captchaSection'); }
+
+  // 2. CAPTCHA WITH 4 ATTEMPT LOCKOUT
+  let currentCaptcha = '';
+  let captchaAttempts = 0;
+  let lockoutTimer = null;
+
+  function generateCaptcha(){
+    const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const digits = '23456789';
+    let code = '';
+    for(let i=0; i<4; i++) code += letters[Math.floor(Math.random() * letters.length)];
+    for(let i=0; i<3; i++) code += digits[Math.floor(Math.random() * digits.length)];
+    currentCaptcha = code.split('').sort(() => Math.random() - 0.5).join('');
+    document.getElementById('captchaCode').innerText = currentCaptcha;
+    document.getElementById('captchaError').style.display = 'none';
+    document.getElementById('captchaInput').value = '';
+  }
+
+  function startLockout(){
+    let timeLeft = 600;
+    document.getElementById('verifyCaptchaBtn').disabled = true;
+    document.getElementById('lockoutMsg').style.display = 'block';
+    lockoutTimer = setInterval(() => {
+      timeLeft--;
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      document.getElementById('countdown').textContent = `${minutes}:${seconds.toString().padStart(2,'0')}`;
+      if(timeLeft <= 0){
+        clearInterval(lockoutTimer);
+        captchaAttempts = 0;
+        document.getElementById('verifyCaptchaBtn').disabled = false;
+        document.getElementById('lockoutMsg').style.display = 'none';
+        generateCaptcha();
+      }
+    }, 1000);
+  }
+
+  document.getElementById('verifyCaptchaBtn').onclick = () => {
+    if(document.getElementById('captchaInput').value.trim().toUpperCase() === currentCaptcha){
+      captchaAttempts = 0; showSection('termsSection');
+    } else {
+      captchaAttempts++;
+      if(captchaAttempts >= 4){ startLockout(); }
+      else { document.getElementById('captchaError').style.display = 'block'; generateCaptcha(); }
+    }
+  }
+
+  // 3. Terms
+  document.getElementById('agreeCheck').onchange = () => {
+    document.getElementById('continueBtn').disabled =!document.getElementById('agreeCheck').checked;
+  }
+  document.getElementById('continueBtn').onclick = () => { showSection('accountForm'); }
+
+  // 4. Image Preview
+  function previewImage(inputId, previewId) {
+    document.getElementById(inputId).onchange = function(e) {
+      const file = e.target.files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          document.getElementById(previewId).src = event.target.result;
+          document.getElementById(previewId).style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+  previewImage('id_front', 'id_front_preview');
+  previewImage('selfie', 'selfie_preview');
+
+  // 5. Form Submit -> Success
+  document.getElementById('bankForm').onsubmit = (e) => {
+    e.preventDefault();
+    if(!document.getElementById('finalAgree').checked){ alert('Please check the agreement box'); return; }
+    showSection('successSection');
+  }
+</script>
+
+</body>
+</html>
