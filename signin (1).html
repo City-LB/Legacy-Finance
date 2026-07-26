@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City Legacy Bank - Sign In</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  
+  body {
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .card {
+    background: #fff;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 24px;
+    padding: 32px 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid #e5e9f0;
+  }
+
+  .logo-section {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 0 auto 12px;
+    filter: drop-shadow(0 0 8px rgba(0, 123, 255, 0.3));
+  }
+  .logo div {
+    background: linear-gradient(135deg, #00aaff, #0077cc);
+    border-radius: 6px;
+  }
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0a2a52;
+    letter-spacing: 0.5px;
+  }
+  .logo-text span {
+    color: #00aaff;
+  }
+  .logo-sub {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #00aaff;
+    border-top: 2px solid #00aaff;
+    display: inline-block;
+    padding-top: 4px;
+  }
+
+  .fdic {
+    text-align: center;
+    font-size: 13px;
+    color: #7a8a9e;
+    margin-bottom: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+    color: #0a2a52;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0a2a52;
+    margin-bottom: 8px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #d9e2ec;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.2s;
+    background: #f8fafc;
+  }
+  input:focus {
+    border-color: #00aaff;
+    background: #fff;
+  }
+  .input-error { border-color: #DC2626 !important; }
+  .error-msg { color: #DC2626; font-size: 13px; margin-top: 6px; display: none; font-weight: 500; }
+
+  .password-wrap {
+    position: relative;
+  }
+  .show-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #5a6b7a;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+  .remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #5a6b7a;
+  }
+  .remember input {
+    width: 18px;
+    height: 18px;
+  }
+  .forgot {
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .forgot:hover { text-decoration: underline; }
+
+  .btn {
+    width: 100%;
+    padding: 16px;
+    background: #00aaff;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: #0088cc; }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="logo-section">
+      <div class="logo">
+        <div></div><div></div>
+        <div></div><div></div>
+      </div>
+      <div class="logo-text">CITY <span>LEGACY</span></div>
+      <div class="logo-sub">BANK</div>
+    </div>
+
+    <div class="fdic">Member FDIC | Equal Housing Lender</div>
+
+    <h2>Sign In</h2>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username / Email</label>
+        <input type="text" id="username" placeholder="Enter your username or email" required>
+        <div class="error-msg" id="userError">⚠ Invalid username or password</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="password" placeholder="Enter your password" required>
+          <span class="show-btn" onclick="togglePassword()">Show</span>
+        </div>
+        <div class="error-msg" id="passError">⚠ Invalid username or password</div>
+      </div>
+
+      <div class="options">
+        <label class="remember">
+          <input type="checkbox">
+          Remember me
+        </label>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn">Sign in</button>
+    </form>
+  </div>
+
+<script>
+  function togglePassword() {
+    const pass = document.getElementById('password');
+    const btn = document.querySelector('.show-btn');
+    if (pass.type === 'password') {
+      pass.type = 'text';
+      btn.textContent = 'Hide';
+    } else {
+      pass.type = 'password';
+      btn.textContent = 'Show';
+    }
+  }
+
+  // LOGIN CHECK & REDIRECT
+  document.getElementById('loginForm').onsubmit = function(e) {
+    e.preventDefault(); // stop form from refreshing
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const userError = document.getElementById('userError');
+    const passError = document.getElementById('passError');
+
+    // Reset errors
+    userError.style.display = 'none';
+    passError.style.display = 'none';
+    document.getElementById('username').classList.remove('input-error');
+    document.getElementById('password').classList.remove('input-error');
+
+    // Check credentials
+    if(username === "Deputy11" && password === "123400") {
+      // Correct - redirect to dashboard.html
+      window.location.href = "dashboard.html";
+    } else {
+      // Wrong - show error
+      userError.style.display = 'block';
+      passError.style.display = 'block';
+      document.getElementById('username').classList.add('input-error');
+      document.getElementById('password').classList.add('input-error');
+    }
+  }
+</script>
+
+</body>
+</html>
